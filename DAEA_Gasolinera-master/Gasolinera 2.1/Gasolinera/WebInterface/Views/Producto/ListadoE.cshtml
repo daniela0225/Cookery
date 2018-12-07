@@ -1,0 +1,28 @@
+﻿@model List<Entities.CProducto>
+@{
+    ViewBag.Title = "ListadoE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    var grid = new WebGrid(source: Model);
+}
+
+<div class="panel-info widget-shadow">
+    <h2>Listado de Productos</h2>
+    <br />
+
+    <h2>@Html.ActionLink("Crear", "FormularioE", "Producto", new { codigo = 0 }, null)</h2>
+    <br />
+    @grid.GetHtml(tableStyle: "table table-striped",
+    columns: grid.Columns(
+          grid.Column(columnName: "codigo", header: "Código"),
+          grid.Column(columnName: "nombre", header: "Nombre"),
+          grid.Column(columnName: "precio", header: "Precio"),
+          grid.Column(columnName: "cantidad", header: "Cantidad"),
+          grid.Column(columnName: "medida", header: "Medida"),
+          grid.Column(
+              header: "Acciones",
+              format:(item) => Html.ActionLink("Editar", "FormularioE", "Producto", new { codigo = item.codigo }, null)
+          )
+        )
+    )
+</div>
+

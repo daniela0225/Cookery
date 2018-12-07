@@ -1,0 +1,76 @@
+﻿@model Entities.CProducto
+@{
+    ViewBag.Title = "FormularioE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    string tipoFormulario = (Model == null) ? "CrearE" : "EditarE";
+}
+
+
+<div class="panel-info widget-shadow">
+    <h2> @tipoFormulario Producto </h2>
+    <br />
+
+    @using (Html.BeginForm((tipoFormulario.Equals("CrearE")) ? "CrearE" : "EditarE", "Producto", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.codigo)
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Nombre
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.nombre)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Precio
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.precio)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Cantidad
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.cantidad)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Medida
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.medida)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="submit" value="Aceptar" />
+                </label>
+            </div>
+        </div>
+    }
+
+</div>

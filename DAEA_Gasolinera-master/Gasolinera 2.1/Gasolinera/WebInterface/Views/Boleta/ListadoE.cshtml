@@ -1,0 +1,21 @@
+﻿@model List<Entities.CBoleta>
+@{
+    ViewBag.Title = "ListadoE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    var grid = new WebGrid(source: Model);
+}
+
+<div class="panel-info widget-shadow">
+    <h2>Listado de Boletas</h2>
+    <br />
+    @Html.ActionLink("Crear", "FormularioE", "Boleta", new { codigo = 0 }, null)
+    <br />
+    @grid.GetHtml(tableStyle: "table table-striped",
+    columns: grid.Columns(
+        grid.Column(columnName: "venta", header: "Venta"),
+        grid.Column(columnName: "dni", header: "DNI"),
+        grid.Column(columnName: "total", header: "Total")
+      
+       )
+      )
+</div>

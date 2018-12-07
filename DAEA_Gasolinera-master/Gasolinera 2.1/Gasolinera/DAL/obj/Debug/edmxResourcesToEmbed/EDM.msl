@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GasolineraModelStoreContainer" CdmEntityContainer="GasolineraEntities">
+    <EntitySetMapping Name="Boleta">
+      <EntityTypeMapping TypeName="GasolineraModel.Boleta">
+        <MappingFragment StoreEntitySet="Boleta">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="venta" ColumnName="venta" />
+          <ScalarProperty Name="dni" ColumnName="dni" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="GasolineraModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="tipo_doc" ColumnName="tipo_doc" />
+          <ScalarProperty Name="documento" ColumnName="documento" />
+          <ScalarProperty Name="nom_ape" ColumnName="nom_ape" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contribuyente">
+      <EntityTypeMapping TypeName="GasolineraModel.Contribuyente">
+        <MappingFragment StoreEntitySet="Contribuyente">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="empresa" ColumnName="empresa" />
+          <ScalarProperty Name="ruc" ColumnName="ruc" />
+          <ScalarProperty Name="departamento" ColumnName="departamento" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="distrito" ColumnName="distrito" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="igv" ColumnName="igv" />
+          <ScalarProperty Name="impresora" ColumnName="impresora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factura">
+      <EntityTypeMapping TypeName="GasolineraModel.Factura">
+        <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="venta" ColumnName="venta" />
+          <ScalarProperty Name="raz_soc" ColumnName="raz_soc" />
+          <ScalarProperty Name="ruc" ColumnName="ruc" />
+          <ScalarProperty Name="pretotal" ColumnName="pretotal" />
+          <ScalarProperty Name="igv" ColumnName="igv" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="GasolineraModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="medida" ColumnName="medida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="GasolineraModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="GasolineraModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="dni" ColumnName="dni" />
+          <ScalarProperty Name="nom_ape" ColumnName="nom_ape" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Venta">
+      <EntityTypeMapping TypeName="GasolineraModel.Venta">
+        <MappingFragment StoreEntitySet="Venta">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="producto" ColumnName="producto" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="contribuyente" ColumnName="contribuyente" />
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="sede" ColumnName="sede" />
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="observacion" ColumnName="observacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="deleteBoleta" FunctionName="GasolineraModel.Store.deleteBoleta" />
+    <FunctionImportMapping FunctionImportName="deleteCliente" FunctionName="GasolineraModel.Store.deleteCliente" />
+    <FunctionImportMapping FunctionImportName="deleteContribuyente" FunctionName="GasolineraModel.Store.deleteContribuyente" />
+    <FunctionImportMapping FunctionImportName="deleteFactura" FunctionName="GasolineraModel.Store.deleteFactura" />
+    <FunctionImportMapping FunctionImportName="deleteProducto" FunctionName="GasolineraModel.Store.deleteProducto" />
+    <FunctionImportMapping FunctionImportName="deleteUsuario" FunctionName="GasolineraModel.Store.deleteUsuario" />
+    <FunctionImportMapping FunctionImportName="deleteVenta" FunctionName="GasolineraModel.Store.deleteVenta" />
+    <FunctionImportMapping FunctionImportName="insertBoleta" FunctionName="GasolineraModel.Store.insertBoleta" />
+    <FunctionImportMapping FunctionImportName="insertCliente" FunctionName="GasolineraModel.Store.insertCliente" />
+    <FunctionImportMapping FunctionImportName="insertContribuyente" FunctionName="GasolineraModel.Store.insertContribuyente" />
+    <FunctionImportMapping FunctionImportName="insertFactura" FunctionName="GasolineraModel.Store.insertFactura" />
+    <FunctionImportMapping FunctionImportName="insertProducto" FunctionName="GasolineraModel.Store.insertProducto" />
+    <FunctionImportMapping FunctionImportName="insertUsuario" FunctionName="GasolineraModel.Store.insertUsuario" />
+    <FunctionImportMapping FunctionImportName="insertVenta" FunctionName="GasolineraModel.Store.insertVenta" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GasolineraModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GasolineraModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GasolineraModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GasolineraModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GasolineraModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GasolineraModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GasolineraModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GasolineraModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GasolineraModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="updateBoleta" FunctionName="GasolineraModel.Store.updateBoleta" />
+    <FunctionImportMapping FunctionImportName="updateCliente" FunctionName="GasolineraModel.Store.updateCliente" />
+    <FunctionImportMapping FunctionImportName="updateContribuyente" FunctionName="GasolineraModel.Store.updateContribuyente" />
+    <FunctionImportMapping FunctionImportName="updateFactura" FunctionName="GasolineraModel.Store.updateFactura" />
+    <FunctionImportMapping FunctionImportName="updateProducto" FunctionName="GasolineraModel.Store.updateProducto" />
+    <FunctionImportMapping FunctionImportName="updateUsuario" FunctionName="GasolineraModel.Store.updateUsuario" />
+    <FunctionImportMapping FunctionImportName="updateVenta" FunctionName="GasolineraModel.Store.updateVenta" />
+  </EntityContainerMapping>
+</Mapping>

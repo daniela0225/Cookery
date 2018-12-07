@@ -1,0 +1,310 @@
+﻿@model Entities.CVenta
+@{
+    ViewBag.Title = "FormularioE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    string tipoFormulario = (Model.codigo < 1) ? "CrearE" : "EditarE";
+
+    BLL.UsuarioBLL usuBLL = new BLL.UsuarioBLL();
+    BLL.ProductoBLL proBLL = new BLL.ProductoBLL();
+    BLL.ContribuyenteBLL conBLL = new BLL.ContribuyenteBLL();
+    BLL.ClienteBLL cliBLL = new BLL.ClienteBLL();
+
+    List<Entities.CUsuario> listaUsuarios = usuBLL.ListaModalBLL();
+    List<Entities.CProducto> listaProductos = proBLL.ListaModalBLL();
+    List<Entities.CContribuyente> listaConts = conBLL.ListaModalBLL();
+    List<Entities.CCliente> listaClientes = cliBLL.ListaModalBLL();
+
+    var gridUsuarios = new WebGrid(source: listaUsuarios, selectionFieldName: "selectedRowUsuario");
+    var gridProductos = new WebGrid(source: listaProductos, selectionFieldName: "selectedRowProducto");
+    var gridConts = new WebGrid(source: listaConts, selectionFieldName: "selectedRowContribuyente");
+    var gridClientes = new WebGrid(source: listaClientes, selectionFieldName: "selectedRowCliente");
+
+    Entities.CUsuario usuSelec = new Entities.CUsuario();
+    Entities.CProducto proSelec = new Entities.CProducto();
+    Entities.CContribuyente conSelec = new Entities.CContribuyente();
+    Entities.CCliente cliSelec = new Entities.CCliente();
+
+    if (gridUsuarios.HasSelection)
+    {
+        usuSelec = gridUsuarios.SelectedRow.Value as Entities.CUsuario;
+        Model.usuario = usuSelec.codigo;
+    }
+
+    if (gridProductos.HasSelection)
+    {
+        proSelec = gridProductos.SelectedRow.Value as Entities.CProducto;
+        Model.producto = proSelec.codigo;
+    }
+
+    if (gridConts.HasSelection)
+    {
+        conSelec = gridConts.SelectedRow.Value as Entities.CContribuyente;
+        Model.contribuyente = conSelec.codigo;
+    }
+
+    if (gridClientes.HasSelection)
+    {
+        cliSelec = gridClientes.SelectedRow.Value as Entities.CCliente;
+        Model.cliente = cliSelec.codigo;
+    }
+}
+
+
+<div class="panel-info widget-shadow">
+    <h2> @tipoFormulario Venta </h2>
+    <br />
+
+    @using (Html.BeginForm((tipoFormulario.Equals("CrearE")) ? "CrearE" : "EditarE", "Venta", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.codigo)
+        @Html.HiddenFor(model => model.usuario, usuSelec.codigo)
+        @Html.HiddenFor(model => model.producto, proSelec.codigo)
+        @Html.HiddenFor(model => model.contribuyente, conSelec.codigo)
+        @Html.HiddenFor(model => model.cliente, cliSelec.codigo)
+        @Html.HiddenFor(model => model.fecha, new DateTime())
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Usuario
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label>
+                    @usuSelec.nom_ape
+                </label>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUsuario">
+                    Ver Usuarios
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Producto
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label>
+                    @proSelec.nombre
+                </label>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProducto">
+                    Ver Productos
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Cantidad
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.cantidad)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Fecha
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.ValueFor(model => model.fecha)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Contribuyente
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label>
+                    @conSelec.empresa
+                </label>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalContribuyente">
+                    Ver Empresas
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Cliente
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label>
+                    @cliSelec.nom_ape
+                </label>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCliente">
+                    Ver Clientes
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Sede
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.sede)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Placa
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.placa)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Observación
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.observacion)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="submit" value="Aceptar" />
+                </label>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Modal Usuarios -->
+<div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @gridUsuarios.GetHtml(tableStyle: "table table-striped",
+                    columns: gridUsuarios.Columns(
+                        gridUsuarios.Column(header: "Selección", format: @<text>@item.GetSelectLink("Seleccionar")</text>),
+  gridUsuarios.Column(columnName: "codigo", header: "Código"),
+  gridUsuarios.Column(columnName: "dni", header: "DNI"),
+  gridUsuarios.Column(columnName: "nom_ape", header: "Nombres y Apellidos")
+)
+)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!--<button type="button" class="btn btn-primary">Aceptar</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Productos -->
+<div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @gridProductos.GetHtml(tableStyle: "table table-striped",
+                    columns: gridProductos.Columns(
+                        gridProductos.Column(header: "Select", format: @<text>@item.GetSelectLink("Select")</text>),
+           gridProductos.Column(columnName: "codigo", header: "Código"),
+           gridProductos.Column(columnName: "nombre", header: "Nombre"),
+           gridProductos.Column(columnName: "precio", header: "Precio"),
+           gridProductos.Column(columnName: "cantidad", header: "Cantidad"),
+           gridProductos.Column(columnName: "medida", header: "Medida")
+       )
+   )
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!--<button type="button" class="btn btn-primary">Aceptar</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Contribuyentes -->
+<div class="modal fade" id="modalContribuyente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @gridConts.GetHtml(tableStyle: "table table-striped",
+                    columns: gridConts.Columns(
+                        gridConts.Column(header: "Select", format: @<text>@item.GetSelectLink("Select")</text>),
+           gridConts.Column(columnName: "codigo", header: "Código"),
+           gridConts.Column(columnName: "empresa", header: "Empresa"),
+           gridConts.Column(columnName: "ruc", header: "RUC")
+    )
+)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!--<button type="button" class="btn btn-primary">Aceptar</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Clientes -->
+<div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @gridClientes.GetHtml(tableStyle: "table table-striped",
+                    columns: gridClientes.Columns(
+                         gridClientes.Column(header: "Select", format: @<text>@item.GetSelectLink("Select")</text>),
+         gridClientes.Column(columnName: "codigo", header: "Código"),
+         gridClientes.Column(columnName: "tipo_doc", header: "Tipo de Documento"),
+         gridClientes.Column(columnName: "documento", header: "Documento"),
+         gridClientes.Column(columnName: "nom_ape", header: "Nombre y Apellido")
+  )
+)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!--<button type="button" class="btn btn-primary">Aceptar</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+

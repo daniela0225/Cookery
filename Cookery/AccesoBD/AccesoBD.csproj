@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B9C8DB3F-F261-4010-B592-A24E75B87D22}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AccesoBD</RootNamespace>
+    <AssemblyName>AccesoBD</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="DeliciApp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DeliciApp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DeliciApp.edmx.diagram">
+      <DependentUpon>DeliciApp.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MealsA.cs" />
+    <Compile Include="MenuA.cs" />
+    <Compile Include="PersonaA.cs" />
+    <Compile Include="DeliciApp.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliciApp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeliciApp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeliciApp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliciApp.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Meals.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Menus.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persons.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReservacionA.cs" />
+    <Compile Include="Reservations.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RestauranteA.cs" />
+    <Compile Include="Restaurants.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScoreA.cs" />
+    <Compile Include="Scores.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeMeal.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeMealA.cs" />
+    <Compile Include="TypeRest.cs">
+      <DependentUpon>DeliciApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeRestA.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DeliciApp.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DeliciApp.Context.cs</LastGenOutput>
+      <DependentUpon>DeliciApp.edmx</DependentUpon>
+    </Content>
+    <Content Include="DeliciApp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DeliciApp.edmx</DependentUpon>
+      <LastGenOutput>DeliciApp.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{2bd565be-c636-4bdb-8754-e52a3795aff5}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

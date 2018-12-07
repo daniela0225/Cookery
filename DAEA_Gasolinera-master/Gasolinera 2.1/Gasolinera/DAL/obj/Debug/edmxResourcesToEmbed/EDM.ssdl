@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GasolineraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Boleta">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="venta" Type="int" />
+    <Property Name="dni" Type="varchar" MaxLength="50" />
+    <Property Name="total" Type="float" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipo_doc" Type="varchar" MaxLength="50" />
+    <Property Name="documento" Type="varchar" MaxLength="20" />
+    <Property Name="nom_ape" Type="varchar" MaxLength="100" />
+    <Property Name="direccion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Contribuyente">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="empresa" Type="varchar" MaxLength="100" />
+    <Property Name="ruc" Type="varchar" MaxLength="50" />
+    <Property Name="departamento" Type="varchar" MaxLength="50" />
+    <Property Name="provincia" Type="varchar" MaxLength="50" />
+    <Property Name="distrito" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" />
+    <Property Name="igv" Type="float" />
+    <Property Name="impresora" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="venta" Type="int" />
+    <Property Name="raz_soc" Type="varchar" MaxLength="50" />
+    <Property Name="ruc" Type="varchar" MaxLength="50" />
+    <Property Name="pretotal" Type="float" />
+    <Property Name="igv" Type="float" />
+    <Property Name="total" Type="float" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" />
+    <Property Name="precio" Type="float" />
+    <Property Name="cantidad" Type="float" />
+    <Property Name="medida" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dni" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="nom_ape" Type="varchar" MaxLength="100" />
+    <Property Name="tipo" Type="varchar" MaxLength="50" />
+    <Property Name="nickname" Type="varchar" MaxLength="100" />
+    <Property Name="password" Type="varchar" MaxLength="127" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario" Type="int" />
+    <Property Name="producto" Type="int" />
+    <Property Name="cantidad" Type="float" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="contribuyente" Type="int" />
+    <Property Name="cliente" Type="int" />
+    <Property Name="sede" Type="varchar" MaxLength="50" />
+    <Property Name="placa" Type="varchar" MaxLength="50" />
+    <Property Name="observacion" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <Association Name="FK_Boleta_Venta">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+    <End Role="Boleta" Type="Self.Boleta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="Boleta">
+        <PropertyRef Name="venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Factura_Venta">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Contribuyente">
+    <End Role="Contribuyente" Type="Self.Contribuyente" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contribuyente">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="contribuyente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venta_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="deleteBoleta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteContribuyente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="insertBoleta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="venta" Type="int" Mode="In" />
+    <Parameter Name="dni" Type="nvarchar" Mode="In" />
+    <Parameter Name="total" Type="float" Mode="In" />
+  </Function>
+  <Function Name="insertCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo_doc" Type="nvarchar" Mode="In" />
+    <Parameter Name="documento" Type="nvarchar" Mode="In" />
+    <Parameter Name="nom_ape" Type="nvarchar" Mode="In" />
+    <Parameter Name="direccion" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="insertContribuyente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="ruc" Type="nvarchar" Mode="In" />
+    <Parameter Name="departamento" Type="nvarchar" Mode="In" />
+    <Parameter Name="provincia" Type="nvarchar" Mode="In" />
+    <Parameter Name="distrito" Type="nvarchar" Mode="In" />
+    <Parameter Name="direccion" Type="nvarchar" Mode="In" />
+    <Parameter Name="igv" Type="float" Mode="In" />
+    <Parameter Name="impresora" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="insertFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="venta" Type="int" Mode="In" />
+    <Parameter Name="raz_soc" Type="nvarchar" Mode="In" />
+    <Parameter Name="ruc" Type="nvarchar" Mode="In" />
+    <Parameter Name="pretotal" Type="float" Mode="In" />
+    <Parameter Name="igv" Type="float" Mode="In" />
+    <Parameter Name="total" Type="float" Mode="In" />
+  </Function>
+  <Function Name="insertProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="precio" Type="float" Mode="In" />
+    <Parameter Name="cantidad" Type="float" Mode="In" />
+    <Parameter Name="medida" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="insertUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dni" Type="nvarchar" Mode="In" />
+    <Parameter Name="nom_ape" Type="nvarchar" Mode="In" />
+    <Parameter Name="tipo" Type="nvarchar" Mode="In" />
+    <Parameter Name="nickname" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="insertVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="usuario" Type="int" Mode="In" />
+    <Parameter Name="producto" Type="int" Mode="In" />
+    <Parameter Name="cantidad" Type="float" Mode="In" />
+    <Parameter Name="fecha" Type="datetime" Mode="In" />
+    <Parameter Name="contribuyente" Type="int" Mode="In" />
+    <Parameter Name="cliente" Type="int" Mode="In" />
+    <Parameter Name="sede" Type="nvarchar" Mode="In" />
+    <Parameter Name="placa" Type="nvarchar" Mode="In" />
+    <Parameter Name="observacion" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="updateBoleta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+    <Parameter Name="venta" Type="int" Mode="In" />
+    <Parameter Name="dni" Type="nvarchar" Mode="In" />
+    <Parameter Name="total" Type="float" Mode="In" />
+  </Function>
+  <Function Name="updateCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+    <Parameter Name="tipo_doc" Type="nvarchar" Mode="In" />
+    <Parameter Name="documento" Type="nvarchar" Mode="In" />
+    <Parameter Name="nom_ape" Type="nvarchar" Mode="In" />
+    <Parameter Name="direccion" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="updateContribuyente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+    <Parameter Name="empresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="ruc" Type="nvarchar" Mode="In" />
+    <Parameter Name="departamento" Type="nvarchar" Mode="In" />
+    <Parameter Name="provincia" Type="nvarchar" Mode="In" />
+    <Parameter Name="distrito" Type="nvarchar" Mode="In" />
+    <Parameter Name="direccion" Type="nvarchar" Mode="In" />
+    <Parameter Name="igv" Type="float" Mode="In" />
+    <Parameter Name="impresora" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="updateFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+    <Parameter Name="venta" Type="int" Mode="In" />
+    <Parameter Name="raz_soc" Type="nvarchar" Mode="In" />
+    <Parameter Name="ruc" Type="nvarchar" Mode="In" />
+    <Parameter Name="pretotal" Type="float" Mode="In" />
+    <Parameter Name="igv" Type="float" Mode="In" />
+    <Parameter Name="total" Type="float" Mode="In" />
+  </Function>
+  <Function Name="updateProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+    <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="precio" Type="float" Mode="In" />
+    <Parameter Name="cantidad" Type="float" Mode="In" />
+    <Parameter Name="medida" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="updateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+    <Parameter Name="dni" Type="nvarchar" Mode="In" />
+    <Parameter Name="nom_ape" Type="nvarchar" Mode="In" />
+    <Parameter Name="tipo" Type="nvarchar" Mode="In" />
+    <Parameter Name="nickname" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="updateVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="int" Mode="In" />
+    <Parameter Name="usuario" Type="int" Mode="In" />
+    <Parameter Name="producto" Type="int" Mode="In" />
+    <Parameter Name="cantidad" Type="float" Mode="In" />
+    <Parameter Name="fecha" Type="datetime" Mode="In" />
+    <Parameter Name="contribuyente" Type="int" Mode="In" />
+    <Parameter Name="cliente" Type="int" Mode="In" />
+    <Parameter Name="sede" Type="nvarchar" Mode="In" />
+    <Parameter Name="placa" Type="nvarchar" Mode="In" />
+    <Parameter Name="observacion" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="GasolineraModelStoreContainer">
+    <EntitySet Name="Boleta" EntityType="Self.Boleta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contribuyente" EntityType="Self.Contribuyente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Boleta_Venta" Association="Self.FK_Boleta_Venta">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="Boleta" EntitySet="Boleta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Factura_Venta" Association="Self.FK_Factura_Venta">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Cliente" Association="Self.FK_Venta_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Contribuyente" Association="Self.FK_Venta_Contribuyente">
+      <End Role="Contribuyente" EntitySet="Contribuyente" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Producto" Association="Self.FK_Venta_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venta_Usuario" Association="Self.FK_Venta_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

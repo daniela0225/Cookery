@@ -1,0 +1,31 @@
+﻿@model List<Entities.CVenta>
+@{
+    ViewBag.Title = "ListadoE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    var grid = new WebGrid(source: Model);
+}
+
+<div class="panel-info widget-shadow">
+    <h2>Listado de Ventas</h2>
+    <br />
+
+    <h2>@Html.ActionLink("Crear", "FormularioE", "Venta", new { codigo = 0 }, null)</h2>
+
+    @grid.GetHtml(tableStyle: "table table-striped",
+    columns: grid.Columns(
+          grid.Column(columnName: "usuario", header: "Usuario"),
+          grid.Column(columnName: "producto", header: "Producto"),
+          grid.Column(columnName: "cantidad", header: "Cantidad"),
+          grid.Column(columnName: "fecha", header: "Fecha"),
+          grid.Column(columnName: "contribuyente", header: "Contribuyente"),
+          grid.Column(columnName: "cliente", header: "Cliente"),
+          grid.Column(columnName: "sede", header: "Sede"),
+          grid.Column(columnName: "placa", header: "Placa"),
+          grid.Column(columnName: "observacion", header: "Observación")
+          
+        )
+    )
+
+</div>
+
+

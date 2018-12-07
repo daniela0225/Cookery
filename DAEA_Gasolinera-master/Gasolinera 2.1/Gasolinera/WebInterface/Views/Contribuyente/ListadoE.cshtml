@@ -1,0 +1,29 @@
+﻿@model List<Entities.CContribuyente>
+@{
+    ViewBag.Title = "ListadoE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    var grid = new WebGrid(source: Model);
+}
+
+<div class="panel-info widget-shadow">
+    <h2>Listado de Contribuyentes</h2>
+    <br />
+
+ 
+
+    @grid.GetHtml(tableStyle: "table table-striped",
+    columns: grid.Columns(
+          grid.Column(columnName: "codigo", header: "Código"),
+          grid.Column(columnName: "empresa", header: "Empresa"),
+          grid.Column(columnName: "ruc", header: "RUC"),
+          grid.Column(columnName: "departamento", header: "Departamento"),
+          grid.Column(columnName: "provincia", header: "Provincia"),
+          grid.Column(columnName: "distrito", header: "Distrito"),
+          grid.Column(columnName: "direccion", header: "Dirección"),
+          grid.Column(columnName: "igv", header: "IGV"),
+          grid.Column(columnName: "impresora", header: "Impresora")
+          
+        )
+    )
+</div>
+

@@ -1,0 +1,129 @@
+﻿@model Entities.CContribuyente
+
+@{
+    <!-- configuracion inicial -->
+
+    ViewBag.Title = "Formulario";
+
+    string tipoFormulario = (Model == null) ? "Crear" : "Editar";
+
+}
+<div class="panel-info widget-shadow">
+    <h2> @tipoFormulario Contribuyente </h2>
+    <br />
+
+    @using (Html.BeginForm((tipoFormulario.Equals("Crear")) ? "Crear" : "Editar", "Contribuyente", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.codigo)
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Empresa
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.empresa)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    RUC
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.ruc)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Departamento
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.departamento)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Provincia
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.provincia)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Distrito
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.distrito)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Dirección
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.direccion)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    IGV
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.igv)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Impresora
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.impresora)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="submit" value="Aceptar" />
+                </label>
+            </div>
+        </div>
+    }
+
+</div>

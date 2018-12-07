@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f97f1f0ad48347a2baf13ca1046d8ec7" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="GasolineraModel.Boleta" Width="1.5" PointX="10.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GasolineraModel.Cliente" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GasolineraModel.Contribuyente" Width="1.5" PointX="10.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GasolineraModel.Factura" Width="1.5" PointX="8.375" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GasolineraModel.Producto" Width="1.5" PointX="4.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GasolineraModel.sysdiagrams" Width="1.5" PointX="12.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GasolineraModel.Usuario" Width="1.5" PointX="4.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GasolineraModel.Venta" Width="1.5" PointX="7" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="GasolineraModel.FK_Boleta_Venta" ManuallyRouted="false" />
+        <AssociationConnector Association="GasolineraModel.FK_Venta_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="GasolineraModel.FK_Venta_Contribuyente" ManuallyRouted="false" />
+        <AssociationConnector Association="GasolineraModel.FK_Factura_Venta" ManuallyRouted="false" />
+        <AssociationConnector Association="GasolineraModel.FK_Venta_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="GasolineraModel.FK_Venta_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

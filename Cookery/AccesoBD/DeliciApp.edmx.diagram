@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ed4aee1b04a447bc8bcaa06e0208b8b4" Name="Diagram1">
+        <EntityTypeShape EntityType="DeliciappModel.Meals" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.Menus" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.Persons" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.Reservations" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.Restaurants" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.Scores" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.TypeMeal" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliciappModel.TypeRest" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="DeliciappModel.FK_Meals_TypeMeal" ManuallyRouted="false" />
+        <AssociationConnector Association="DeliciappModel.FK_Menus_Meals" ManuallyRouted="false" />
+        <AssociationConnector Association="DeliciappModel.FK_Menus_Restaurants" ManuallyRouted="false" />
+        <AssociationConnector Association="DeliciappModel.FK_Reservations_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="DeliciappModel.FK_Scores_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="DeliciappModel.FK_Reservations_Restaurants" ManuallyRouted="false" />
+        <AssociationConnector Association="DeliciappModel.FK_Restaurants_Restaurants" ManuallyRouted="false" />
+        <AssociationConnector Association="DeliciappModel.FK_Scores_Restaurants" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

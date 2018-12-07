@@ -1,0 +1,25 @@
+﻿@model List<Entities.CFactura>
+@{
+    ViewBag.Title = "ListadoE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    var grid = new WebGrid(source: Model);
+}
+
+<div class="panel-info widget-shadow">
+    <h2>Listado de Facturas</h2>
+    <br />
+    @Html.ActionLink("Crear", "FormularioE", "Factura", new { codigo = 0 }, null)
+    <br />
+    @grid.GetHtml(tableStyle: "table table-striped",
+    columns: grid.Columns(
+        grid.Column(columnName: "venta", header: "Venta"),
+        grid.Column(columnName: "raz_soc", header: "Razón Social"),
+        grid.Column(columnName: "ruc", header: "RUC"),
+        grid.Column(columnName: "pretotal", header: "Pre-Total"),
+        grid.Column(columnName: "igv", header: "IGV"),
+        grid.Column(columnName: "total", header: "Total")
+        
+       )
+      )
+</div>
+

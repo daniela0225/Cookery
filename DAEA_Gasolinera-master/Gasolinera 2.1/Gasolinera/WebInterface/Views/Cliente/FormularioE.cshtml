@@ -1,0 +1,91 @@
+﻿@model Entities.CCliente
+@{
+    ViewBag.Title = "FormularioE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+
+    string tipoFormulario = (Model == null) ? "CrearE" : "EditarE";
+
+    List<SelectListItem> tiposDoc = new List<SelectListItem>();
+    tiposDoc.Add(new SelectListItem
+    {
+        Text = "DNI",
+        Value = "DNI"
+    });
+    tiposDoc.Add(new SelectListItem
+    {
+        Text = "Otro",
+        Value = "Otro",
+        Selected = true
+    });
+}
+
+<div class="panel-info widget-shadow">
+    <h2> @tipoFormulario Usuario </h2>
+    <br />
+
+    @using (Html.BeginForm((tipoFormulario.Equals("CrearE")) ? "CrearE" : "EditarE", "Cliente", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.codigo)
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Tipo de Documento
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.DropDownListFor(model => model.tipo_doc, tiposDoc)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Documento
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.documento)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Nombres y Apellidos
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.nom_ape)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Dirección
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.direccion)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="submit" value="Aceptar" />
+                </label>
+            </div>
+        </div>
+    }
+</div>
+
+

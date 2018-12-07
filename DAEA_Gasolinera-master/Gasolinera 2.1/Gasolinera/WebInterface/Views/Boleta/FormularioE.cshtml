@@ -1,0 +1,112 @@
+﻿@model  Entities.CBoleta
+@{
+    ViewBag.Title = "FormularioE";
+    Layout = "~/Views/Shared/Layout3.cshtml";
+    string tipoFormulario = (Model == null) ? "CrearE" : "EditarE";
+
+    BLL.VentaBLL venBLL = new BLL.VentaBLL();
+
+    List<Entities.CVenta> listaVentas = venBLL.ListaModalBLL();
+
+    var gridVentas = new WebGrid(source: listaVentas, selectionFieldName: "selectedRowVenta");
+
+    Entities.CVenta venSelec = new Entities.CVenta();
+
+    if (gridVentas.HasSelection)
+    {
+        venSelec = gridVentas.SelectedRow.Value as Entities.CVenta;
+        Model.venta = venSelec.codigo;
+    }
+}
+
+
+<div class="panel-info widget-shadow">
+    <h2> @tipoFormulario Boleta </h2>
+    <br />
+
+    @using (Html.BeginForm((tipoFormulario.Equals("CrearE")) ? "CrearE" : "EditarE", "Boleta", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.codigo)
+        @Html.HiddenFor(model => model.venta, venSelec.codigo)
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Venta
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @venSelec.codigo
+                </label>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalVenta">
+                    Ver Ventas
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    DNI
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.dni)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>
+                    Total
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    @Html.TextBoxFor(model => model.total)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="submit" value="Aceptar" />
+                </label>
+            </div>
+        </div>
+    }
+</div>
+<!-- Modal Ventas -->
+<div class="modal fade" id="modalVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @gridVentas.GetHtml(tableStyle: "table table-striped",
+                    columns: gridVentas.Columns(
+                            gridVentas.Column(header: "Select", format: @<text>@item.GetSelectLink("Select")</text>),
+                  gridVentas.Column(columnName: "codigo", header: "Código"),
+                  gridVentas.Column(columnName: "producto", header: "Producto"),
+                  gridVentas.Column(columnName: "cantidad", header: "Cantidad"),
+                  gridVentas.Column(columnName: "fecha", header: "Fecha"),
+                  gridVentas.Column(columnName: "placa", header: "Placa")
+)
+)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!--<button type="button" class="btn btn-primary">Aceptar</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
